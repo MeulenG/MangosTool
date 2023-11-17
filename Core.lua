@@ -6,7 +6,7 @@ local function TeleportHandler(locKey)
     local loc = locations[locKey]
     if loc then
         local command = string.format(".go %f %f %f %d %s", loc.x, loc.y, loc.z, loc.map, locKey)
-        Print("Teleport Command: " .. command)
+        return command
     else
         Print("Invalid Location/Coordinates")
     end
@@ -33,8 +33,8 @@ SlashCmdList["TOGGLETPUI"] = ToggleTeleportFrame
 -- Create the TeleportFrame
 local TeleportFrame = CreateFrame("Frame", "TeleportFrame", UIParent)
 TeleportFrame:SetPoint("CENTER", UIParent, "CENTER")
-TeleportFrame:SetWidth(300)
-TeleportFrame:SetHeight(300)
+TeleportFrame:SetWidth(500)
+TeleportFrame:SetHeight(500)
 TeleportFrame:SetBackdrop({
     bgFile = "Interface\\DialogFrame\\UI-DialogBox-Background", 
     edgeFile = "Interface\\DialogFrame\\UI-DialogBox-Border", 
@@ -43,56 +43,6 @@ TeleportFrame:SetBackdrop({
 })
 TeleportFrame:SetBackdropColor(0,0,0,1)
 TeleportFrame:Show()
-
--- Create the StormwindButton
-local StormwindButton = CreateFrame("Button", "StormwindButton", TeleportFrame)
--- Button setup code
-StormwindButton:SetScript("OnClick", function()
-    TeleportHandler("stormwind")
-end)
-
--- Create a FontString for the Stormwind button
-local buttonText = StormwindButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-buttonText:SetFont("Fonts\\FRIZQT__.TTF", 12)
-buttonText:SetPoint("CENTER", StormwindButton, "CENTER")
-buttonText:SetJustifyH("CENTER")
-buttonText:SetJustifyV("MIDDLE")
-buttonText:SetText("Stormwind")
-
-StormwindButton:SetFontString(buttonText)
-
-StormwindButton:SetNormalTexture("Interface\\Buttons\\UI-Panel-Button-Up")
-StormwindButton:SetPushedTexture("Interface\\Buttons\\UI-Panel-Button-Down")
-StormwindButton:SetHighlightTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
-
-StormwindButton:SetScript("OnClick", function()
-    TeleportHandler("stormwind")
-end)
-
--- Create the TPButton
-local TPButton = CreateFrame("Button", "TPButton", TeleportFrame)
-TPButton:SetWidth(100)
-TPButton:SetHeight(40)
-TPButton:SetPoint("TOPRIGHT", TeleportFrame, "TOPRIGHT", -10, -10)
-
--- Create a FontString for the TP button
-local tpButtonText = TPButton:CreateFontString(nil, "OVERLAY", "GameFontNormal")
-tpButtonText:SetFont("Fonts\\FRIZQT__.TTF", 12)
-tpButtonText:SetPoint("CENTER", TPButton, "CENTER")
-tpButtonText:SetJustifyH("CENTER")
-tpButtonText:SetJustifyV("MIDDLE")
-tpButtonText:SetText("Teleport")
-
-TPButton:SetFontString(tpButtonText)
-
-TPButton:SetNormalTexture("Interface\\Buttons\\UI-Panel-Button-Up")
-TPButton:SetPushedTexture("Interface\\Buttons\\UI-Panel-Button-Down")
-TPButton:SetHighlightTexture("Interface\\Buttons\\UI-Panel-Button-Highlight")
-
-TPButton:SetScript("OnClick", function()
-    -- Add the functionality for the TP button here
-end)
-
 
 -- Create a Scroll Frame
 local scrollFrame = CreateFrame("ScrollFrame", "TeleportScrollFrame", TeleportFrame, "UIPanelScrollFrameTemplate")
@@ -105,27 +55,64 @@ scrollFrame:SetScrollChild(scrollChild)
 scrollChild:SetWidth(260)
 scrollChild:SetHeight(400)
 
+-- Function to filter location buttons
+local function FilterLocationButtons(filterText)
+    filterText = filterText:lower()
+    local index = 1
+    local yOffset = -10
+    for name, _ in pairs(locations) do
+        local button = _G["LocationButton" .. index]
+        if button then
+            if name:lower():find(filterText) then
+                button:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 10, yOffset)
+                button:Show()
+                yOffset = yOffset - 25
+            else
+                button:Hide()
+            end
+            index = index + 1
+        end
+    end
+    scrollChild:SetHeight(math.abs(yOffset))
+end
+
+-- Create a search bar (EditBox)
+local searchBar = CreateFrame("EditBox", "LocationSearchBar", TeleportFrame, "InputBoxTemplate")
+searchBar:SetWidth(200)
+searchBar:SetHeight(20)
+searchBar:SetPoint("TOP", TeleportFrame, "TOP", 0, -30)  -- Position at the top of the frame
+searchBar:SetAutoFocus(false)  -- Prevent the box from automatically focusing
+searchBar:SetScript("OnTextChanged", function(self)
+    FilterLocationButtons(self:GetText())  -- Function to filter buttons based on search
+end)
+
 -- Function to create a button for each location
 local function CreateLocationButton(name, index)
     local button = CreateFrame("Button", "LocationButton" .. index, scrollChild, "UIPanelButtonTemplate")
-    -- Button setup code
+    button:SetWidth(240)
+    button:SetHeight(20)
+    button:SetText(name)
+
+    -- Simple positioning for diagnostic purposes
+    button:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 10, -10 - (index - 1) * 25)
+
     button:SetScript("OnClick", function()
-        TeleportHandler(name)
+        SendChatMessage(TeleportHandler(name), "SAY")
     end)
+
     return button
 end
 
--- Initialize index
+-- Populate buttons
 local index = 1
-
--- Populate the scrollable area with buttons
-local yOffset = -10  -- Start offset
 for name, _ in pairs(locations) do
-    local button = CreateLocationButton(name, index)
-    button:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 10, yOffset)
-    yOffset = yOffset - 25  -- Adjust the Y offset for each new button
-    index = index + 1  -- Increment index for each location
+    CreateLocationButton(name, index)
+    index = index + 1
 end
 
--- Adjust the size of the scroll child to accommodate the content
-scrollChild:SetHeight(math.abs(yOffset))
+-- Set the scrollChild's height based on the number of buttons
+scrollChild:SetHeight(index * 25)
+FilterLocationButtons("")  -- Passing an empty string will show all locations
+
+-- Make sure scrollChild is properly sized and attached to scrollFrame
+scrollFrame:SetScrollChild(scrollChild)
