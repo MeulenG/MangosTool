@@ -12,22 +12,94 @@ local function TeleportHandler(locKey)
     end
 end
 
-local function ToggleTeleportFrame()
-    if TeleportFrame:IsVisible() then
+local function MangosTool_Toggle()
+    if (TeleportFrame:IsVisible()) then
         TeleportFrame:Hide()
     else
         TeleportFrame:Show()
     end
 end
 
+
+--[[
+MangosTool_SlashCommand(msg):
+msg - takes the argument for the /atlasloot command so that the appropriate action can be performed
+If someone types /atlasloot, bring up the options box
+]]
+function MangosTool_SlashCommand(msg)
+	if (msg == AL["options"]) then
+		AtlasLootOptions_Toggle();
+	else
+		AtlasLootDefaultFrame:Show();
+	end
+end
+
+--[[
+AtlasLootOptions_Toggle:
+Toggle on/off the options window
+]]
+function MangosToolOptions_Toggle()
+	if(AtlasLootOptionsFrame:IsVisible()) then
+		--Hide the options frame if already shown
+		AtlasLootOptionsFrame:Hide();
+	else
+		AtlasLootOptionsFrame:Show();
+		--Workaround for a weird quirk where tooltip settings so not immediately take effect
+		if(AtlasLoot.db.profile.DefaultTT == true) then
+			AtlasLootOptions_DefaultTTToggle();
+		elseif(AtlasLoot.db.profile.LootlinkTT == true) then
+			AtlasLootOptions_LootlinkTTToggle();
+		elseif(AtlasLoot.db.profile.ItemSyncTT == true) then
+			AtlasLootOptions_ItemSyncTTToggle();
+		end
+	end
+end
+
+--[[
+MangosTool_OnLoad:
+Performs inital setup of the mod and registers it for further setup when
+the required resources are in place
+]]
+function MangosTool_OnLoad()
+	--Enable the use of /mt or /mangostool to open the tool
+	SLASH_ATLASLOOT1 = "/atlasloot";
+	SLASH_ATLASLOOT2 = "/al";
+	SlashCmdList["ATLASLOOT"] = function(msg)
+		AtlasLoot_SlashCommand(msg);
+	end
+end
+
+
+--[[
+AtlasLootItemsFrame_OnCloseButton:
+Called when the close button on the item frame is clicked
+]]
+function AtlasLootItemsFrame_OnCloseButton()
+	--Set no loot table as currently selected
+	AtlasLootItemsFrame.activeBoss = nil;
+	--Fix the boss buttons so the correct icons are displayed
+    if AtlasFrame and AtlasFrame:IsVisible() then
+        if ATLAS_CUR_LINES then
+            for i=1,ATLAS_CUR_LINES do
+                if getglobal("AtlasBossLine"..i.."_Selected"):IsVisible() then
+                    getglobal("AtlasBossLine"..i.."_Selected"):Hide();
+                    getglobal("AtlasBossLine"..i.."_Loot"):Show();
+                end
+            end
+        end
+    end
+	--Hide the item frame
+	AtlasLootItemsFrame:Hide();
+end
+
 -- Slash Commands
 SLASH_TELEPORT1 = '/teleport'
 SLASH_RELOADUI1 = "/rl";
-SLASH_TOGGLETPUI1 = "/tptoggle"
+SLASH_TOGGLETPUI1 = "/mangostool"
 -- Parse Commands
 SlashCmdList.RELOADUI = ReloadUI;
 SlashCmdList["TELEPORT"] = TeleportHandler
-SlashCmdList["TOGGLETPUI"] = ToggleTeleportFrame
+SlashCmdList["TOGGLETPUI"] = MangosTool_Toggle
 
 
 -- Create the TeleportFrame
@@ -42,7 +114,6 @@ TeleportFrame:SetBackdrop({
     insets = { left = 8, right = 8, top = 8, bottom = 8 }
 })
 TeleportFrame:SetBackdropColor(0,0,0,1)
-TeleportFrame:Show()
 
 -- Create a Scroll Frame
 local scrollFrame = CreateFrame("ScrollFrame", "TeleportScrollFrame", TeleportFrame, "UIPanelScrollFrameTemplate")

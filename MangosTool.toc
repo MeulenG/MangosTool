@@ -1,5 +1,5 @@
 ## Interface: 20400
-## Title: HelloWorld
+## Title: MangosTool
 ## Author: OM
 ## Version: 1.0
 
