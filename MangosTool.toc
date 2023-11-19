@@ -3,5 +3,8 @@
 ## Author: OM
 ## Version: 1.0
 
-Locations.lua
-Core.lua
+MyAddon.xml
+Teleport/Teleport.xml
+AddItems/AddItems.xml
+GMCommands/GMCommands.xml
+MyAddon.lua

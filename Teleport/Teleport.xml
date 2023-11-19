@@ -1,0 +1,5 @@
+<Ui xmlns="http://www.blizzard.com/wow/ui/">
+    <Frame name="MyAddon_TeleportFrame" parent="UIParent" hidden="true">
+        <!-- Frame properties -->
+    </Frame>
+</Ui>

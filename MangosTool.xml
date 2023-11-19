@@ -1,6 +1,95 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/"
- xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
- xsi:schemaLocation="http://www.blizzard.com/wow/ui/ ..\FrameXML\UI.xsd">
-   <Frame name="MyAddon_Frame">
-   </Frame>
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+    <Script file="MangosTool.lua" />
+    <Frame name="MyAddon" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" parent="UIParent" enableKeyboard="true">
+        <Size>
+            <AbsDimension x="600" y="690" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER" />
+        </Anchors>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <BackgroundInsets>
+                <AbsInset left="11" right="12" top="12" bottom="11"/>
+            </BackgroundInsets>
+            <TileSize>
+                <AbsValue val="32"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="32"/>
+            </EdgeSize>
+        </Backdrop>
+        <Frames>
+            <Button name="$parent_CloseButton" inherits="UIPanelCloseButton" parent="MyAddon">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-10" y="-10"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        MyAddon:Hide();
+                    </OnClick>
+                    <OnShow>
+                        this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+                    </OnShow>
+                </Scripts>
+            </Button>
+            <Button name="MyAddon_Tab1" parent="MyAddon" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="150" y="22"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="MyAddon" relativePoint="BOTTOMLEFT" x="10" y="0"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        MyAddon_ShowTab(1);
+                    </OnClick>
+                    <OnShow>
+						local MD = AceLibrary("AceLocale-2.2"):new("MyAddon");
+						this:SetText(MD["Tab1"]);
+						this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+					</OnShow>
+                </Scripts>
+            </Button>
+            <Button name="MyAddon_Tab2" parent="MyAddon" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="150" y="22"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="MyAddon_Tab1" relativePoint="TOPRIGHT" x="10" y="0"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        MyAddon_ShowTab(2);
+                    </OnClick>
+                    <OnShow> 
+						local MD = AceLibrary("AceLocale-2.2"):new("MyAddon");
+						this:SetText(MD["Tab2"]);
+						this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+					</OnShow>
+                </Scripts>
+            </Button>
+            <Button name="MyAddon_Tab3" parent="MyAddon" inherits="UIPanelButtonTemplate">
+                <Size>
+                    <AbsDimension x="150" y="22"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" relativeTo="MyAddon_Tab2" relativePoint="TOPRIGHT" x="10" y="0"/>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        MyAddon_ShowTab(3);
+                    </OnClick>
+                    <OnShow>
+						local MD = AceLibrary("AceLocale-2.2"):new("MyAddon");
+						this:SetText(MD["Tab3"]);
+						this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+					</OnShow>
+                </Scripts>
+            </Button>
+        </Frames>
+    </Frame>
 </Ui>
