@@ -3,8 +3,7 @@
 ## Author: OM
 ## Version: 1.0
 
-MyAddon.xml
-Teleport/Teleport.xml
-AddItems/AddItems.xml
-GMCommands/GMCommands.xml
-MyAddon.lua
+Teleport\Teleport.xml
+MangosTool.xml
+Teleport\Teleport.lua
+MangosTool.lua

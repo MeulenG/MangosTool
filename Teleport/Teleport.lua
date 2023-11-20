@@ -1,6 +1,7 @@
-
+local AL = AceLibrary("AceLocale-2.2"):new("MangosTool");
 
 local function TeleportHandler(locKey)
+    -- Assuming 'locations' is a table defined elsewhere with location data
     local loc = locations[locKey]
     if loc then
         local command = string.format(".go %f %f %f %d %s", loc.x, loc.y, loc.z, loc.map, locKey)
@@ -18,15 +19,8 @@ local function MangosTool_Toggle()
     end
 end
 
--- Slash Commands
-SLASH_TELEPORT1 = '/teleport'
-SLASH_TOGGLETPUI1 = "/mangostool"
--- Parse Commands
-SlashCmdList["TELEPORT"] = TeleportHandler
-SlashCmdList["TOGGLETPUI"] = MangosTool_Toggle
-
 -- Function to filter location buttons
-function Teleport:Search(filterText)
+function FilterText(filterText)
     filterText = filterText:lower()
     local index = 1
     local yOffset = -10
@@ -34,7 +28,7 @@ function Teleport:Search(filterText)
         local button = _G["LocationButton" .. index]
         if button then
             if name:lower():find(filterText) then
-                button:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 10, yOffset)
+                button:SetPoint("TOP", TeleportScrollChildFrame, "TOP", 20, -50 - (index - 1) * 20)
                 button:Show()
                 yOffset = yOffset - 25
             else
@@ -43,18 +37,18 @@ function Teleport:Search(filterText)
             index = index + 1
         end
     end
-    scrollChild:SetHeight(math.abs(yOffset))
+    TeleportScrollChildFrame:SetHeight(math.abs(yOffset))
 end
 
+
 -- Function to create a button for each location
-local function CreateLocationButton(name, index)
-    local button = CreateFrame("Button", "LocationButton" .. index, scrollChild, "UIPanelButtonTemplate")
+function CreateLocationButton(name, index)
+    local button = CreateFrame("Button", "LocationButton" .. index, TeleportScrollChildFrame, "UIPanelButtonTemplate")
     button:SetWidth(240)
     button:SetHeight(20)
     button:SetText(name)
 
-    -- Simple positioning for diagnostic purposes
-    button:SetPoint("TOPLEFT", scrollChild, "TOPLEFT", 10, -10 - (index - 1) * 25)
+    button:SetPoint("TOP", TeleportScrollChildFrame, "TOP", 20, -50 - (index - 1) * 20)
 
     button:SetScript("OnClick", function()
         SendChatMessage(TeleportHandler(name), "SAY")
@@ -63,16 +57,34 @@ local function CreateLocationButton(name, index)
     return button
 end
 
--- Populate buttons
-local index = 1
-for name, _ in pairs(locations) do
-    CreateLocationButton(name, index)
-    index = index + 1
+
+function MangosTool_OnCloseButton()
+	--Hide the item frame
+	MangosTool:Hide();
 end
 
--- Set the scrollChild's height based on the number of buttons
-scrollChild:SetHeight(index * 25)
-FilterLocationButtons("")  -- Passing an empty string will show all locations
+SLASH_TELEPORT1 = '/teleport'
+SLASH_RELOADUI1 = "/rl";
+SLASH_TOGGLETPUI1 = "/mangostool"
 
--- Make sure scrollChild is properly sized and attached to scrollFrame
-scrollFrame:SetScrollChild(scrollChild)
+SlashCmdList.RELOADUI = ReloadUI;
+SlashCmdList["TELEPORT"] = TeleportHandler
+SlashCmdList["TOGGLETPUI"] = MangosTool_Toggle
+
+local function OnAddonLoaded(self, event, addonName)
+    if addonName == "MangosTool" then
+        local index = 1
+        for name, _ in pairs(locations) do
+            CreateLocationButton(name, index)
+            index = index + 1
+        end
+        local totalHeight = index * 20
+        TeleportScrollChildFrame:SetHeight(totalHeight)
+
+        TeleportScrollFrame:SetScrollChild(TeleportScrollChildFrame)
+    end
+end
+
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("ADDON_LOADED")
+eventFrame:SetScript("OnEvent", OnAddonLoaded)

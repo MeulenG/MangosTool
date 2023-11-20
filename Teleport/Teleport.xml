@@ -1,5 +1,108 @@
-<Ui xmlns="http://www.blizzard.com/wow/ui/">
-    <Frame name="MyAddon_TeleportFrame" parent="UIParent" hidden="true">
-        <!-- Frame properties -->
+<Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
+    <Script file="Locations.lua"/>
+    <Script file="Teleport.lua"/>
+
+    <Frame name="MangosTool_TeleportFrame" toplevel="true" frameStrata="DIALOG" movable="true" hidden="True" enableMouse="true" parent="UIParent" enableKeyboard="true">
+        <Size>
+            <AbsDimension x="600" y="690" />
+        </Size>
+        <Anchors>
+            <Anchor point="CENTER"/>
+        </Anchors>
+        <Backdrop bgFile="Interface\DialogFrame\UI-DialogBox-Background" edgeFile="Interface\DialogFrame\UI-DialogBox-Border" tile="true">
+            <TileSize>
+                <AbsValue val="32"/>
+            </TileSize>
+            <EdgeSize>
+                <AbsValue val="32"/>
+            </EdgeSize>
+            <BackgroundInsets>
+                <AbsInset left="8" right="8" top="8" bottom="8"/>
+            </BackgroundInsets>
+        </Backdrop>
+        <Frames>
+            <Button name="$parent_CloseButton" inherits="UIPanelCloseButton" parent="MangosTool_TeleportFrame">
+                <Anchors>
+                    <Anchor point="TOPRIGHT" relativeTo="$parent" relativePoint="TOPRIGHT">
+                        <Offset>
+                            <AbsDimension x="-10" y="-10"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnClick>
+                        MangosTool_TeleportFrame:Hide();
+                    </OnClick>
+                    <OnShow>
+                        this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+                    </OnShow>
+                </Scripts>
+            </Button>
+            <!-- Scroll Frame -->
+            <ScrollFrame name="TeleportScrollFrame" parent="MangosTool_TeleportFrame" inherits="UIPanelScrollFrameTemplate">
+                <Size>
+                    <AbsDimension x="460" y="420"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="TOPLEFT" x="10" y="-60"/>
+                    <Anchor point="BOTTOMRIGHT" x="-30" y="10"/>
+                </Anchors>
+                <!-- Scroll Child Frame -->
+                <Frames>
+                    <Frame name="TeleportScrollChildFrame" parent="TeleportScrollFrame">
+                        <Size>
+                            <AbsDimension x="560" y="620"/>
+                        </Size>
+                        <Anchors>
+                            <Anchor point="BOTTOMRIGHT" x="-30" y="20"/> 
+                        </Anchors>
+                    </Frame>
+                </Frames>
+            </ScrollFrame>
+            <!-- Search Bar -->
+            <EditBox name="LocationSearchBar" parent="MangosTool_TeleportFrame" inherits="InputBoxTemplate">
+                <Size>
+                    <AbsDimension x="200" y="20" />
+                </Size>
+                <Anchors>
+                    <Anchor point="TOP" relativeTo="MangosTool_TeleportFrame" relativePoint="TOP">
+                        <Offset>
+                            <AbsDimension x="0" y="-20"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                	<OnLoad>
+						this:SetAutoFocus(false);
+					</OnLoad>
+                    <OnTextChanged>
+                        FilterText(self:GetText())
+                    </OnTextChanged>
+                </Scripts>
+            </EditBox>
+            <Button name="TeleportFrameSearchButton" inherits="UIPanelButtonTemplate2" parent="LocationSearchBar">
+                <Size>
+                    <AbsDimension x="69" y="32"/>
+                </Size>
+                <Anchors>
+                    <Anchor point="RIGHT" relativePoint="LocationSearchBar">
+                        <Offset>
+                            <AbsDimension x="0" y="0"/>
+                        </Offset>
+                    </Anchor>
+                </Anchors>
+                <Scripts>
+                    <OnShow>
+                        this:SetFrameLevel(100);
+                        this:SetText("Search");
+                        this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
+                    </OnShow>
+                    <OnClick>
+                        FilterText(LocationSearchBar:GetText());
+                        LocationSearchBar:ClearFocus();
+                    </OnClick>
+                </Scripts>
+            </Button>
+        </Frames>
     </Frame>
 </Ui>

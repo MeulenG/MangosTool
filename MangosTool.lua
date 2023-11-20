@@ -1,51 +1,12 @@
-local MD = AceLibrary("AceLocale-2.2"):new("MyAddon");
+local MD = AceLibrary("AceLocale-2.2"):new("MangosTool");
 
-SLASH_RELOADUI1 = "/rl";
-SlashCmdList.RELOADUI = ReloadUI;
-
-function Print(text)
-	DEFAULT_CHAT_FRAME:AddMessage(text)
-end
-
-function MyMod_ShowMessage()
-    message("Hello World!");
-end
-
-function MyAddon_OnCloseButton()
-	--Hide the item frame
-	MyAddon:Hide();
-end
-
-function MyAddon_ShowTab(tabId)
-    local teleportFrame = _G["MyAddon_TeleportFrame"]
-    local addItemsFrame = _G["MyAddon_AddItemsFrame"]
-    local gmCommandsFrame = _G["MyAddon_GMCommandsFrame"]
-
-    if teleportFrame and addItemsFrame and gmCommandsFrame then
-        teleportFrame:SetShown(tabId == 1)
-        addItemsFrame:SetShown(tabId == 2)
-        gmCommandsFrame:SetShown(tabId == 3)
-    else
-        Print("One or more frames are nil.")
-    end
-end
-
-MD:RegisterTranslations("enUS", function() return {
-    Tab1 = "Teleport",
-    Tab2 = "Add Items",
-    Tab3 = "GM Commands",
-} end)
 
 local function OnAddonLoaded(self, event, addonName)
-    if addonName == "MyAddon" then
-        local teleportFrame = _G["MyAddon_TeleportFrame"]
-        local addItemsFrame = _G["MyAddon_AddItemsFrame"]
-        local gmCommandsFrame = _G["MyAddon_GMCommandsFrame"]
-
-        if teleportFrame and addItemsFrame and gmCommandsFrame then
-            Print("All frames loaded successfully.")
+    if addonName == "MangosTool" then
+        if MangosTool_TeleportFrame then
+            Print("Teleport Frame is loaded and shown.")
         else
-            Print("One or more frames are nil.")
+            Print("Teleport Frame is nil.")
         end
     end
 end
@@ -53,3 +14,42 @@ end
 local eventFrame = CreateFrame("Frame")
 eventFrame:RegisterEvent("ADDON_LOADED")
 eventFrame:SetScript("OnEvent", OnAddonLoaded)
+
+local function MangosTool_Toggle()
+    if (MangosTool:IsVisible()) then
+        MangosTool:Hide()
+    else
+        MangosTool:Show()
+    end
+end
+
+-- Slash Commands
+SLASH_TOGGLETPUI1 = "/mangostool"
+SLASH_RELOADUI1 = "/rl";
+-- Parse Commands
+SlashCmdList.RELOADUI = ReloadUI;
+SlashCmdList["TOGGLETPUI"] = MangosTool_Toggle
+
+function Print(text)
+	DEFAULT_CHAT_FRAME:AddMessage(text)
+end
+
+function MangosTool_OnCloseButton()
+	--Hide the item frame
+	MangosTool:Hide();
+end
+
+function MangosTool_ShowTab(tabId)
+    if tabId == 1 then
+        -- Show the TeleportFrame and hide the main MangosTool frame
+        MangosTool_TeleportFrame:Show()
+        MangosTool:Hide()
+    end
+end
+
+MD:RegisterTranslations("enUS", function() return {
+    Tab1 = "Teleport",
+    Tab2 = "Add Items",
+    Tab3 = "GM Commands",
+    Search = "Search",
+} end)
