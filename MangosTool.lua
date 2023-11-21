@@ -1,6 +1,3 @@
-local MD = AceLibrary("AceLocale-2.2"):new("MangosTool");
-
-
 local function OnAddonLoaded(self, event, addonName)
     if addonName == "MangosTool" then
         if MangosTool_TeleportFrame then
@@ -42,8 +39,16 @@ end
 function MangosTool_ShowTab(tabId)
     if tabId == 1 then
         -- Show the TeleportFrame and hide the main MangosTool frame
-        MangosTool_TeleportFrame:Show()
+        AtlasLootDefaultFrame:Show()
         MangosTool:Hide()
+    end
+    if tabId == 2 then
+        Mangos_GMCommandsFrame:Show()
+        MangosTool_Hide()
+    end
+    if tabId == 3 then
+        Mangos_GMCommandsFrame:Show()
+        MangosTool_Hide()
     end
 end
 
