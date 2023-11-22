@@ -48,8 +48,8 @@
                     MangosTool_ShowTab(1);
                   </OnClick>
                   <OnShow>
-                    local MD = AceLibrary("AceLocale-2.2"):new("MangosTool");
-                    this:SetText(MD["Tab1"]);
+                    local AL = AceLibrary("AceLocale-2.2"):new("MangosTool");
+                    this:SetText(AL["Tab1"]);
                     this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
                   </OnShow>
                 </Scripts>
@@ -66,8 +66,8 @@
                       MangosTool_ShowTab(2);
                   </OnClick>
                   <OnShow> 
-                    local MD = AceLibrary("AceLocale-2.2"):new("MangosTool");
-                    this:SetText(MD["Tab2"]);
+                    local AL = AceLibrary("AceLocale-2.2"):new("MangosTool");
+                    this:SetText(AL["Tab2"]);
                     this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
                 </OnShow>
                 </Scripts>
@@ -84,8 +84,8 @@
                       MangosTool_ShowTab(3);
                   </OnClick>
                   <OnShow>
-                      local MD = AceLibrary("AceLocale-2.2"):new("MangosTool");
-                      this:SetText(MD["Tab3"]);
+                      local AL = AceLibrary("AceLocale-2.2"):new("MangosTool");
+                      this:SetText(AL["Tab3"]);
                       this:SetFrameLevel( (this:GetParent()):GetFrameLevel() + 1 );
                   </OnShow>
                 </Scripts>

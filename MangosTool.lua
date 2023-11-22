@@ -1,16 +1,4 @@
-local function OnAddonLoaded(self, event, addonName)
-    if addonName == "MangosTool" then
-        if MangosTool_TeleportFrame then
-            Print("Teleport Frame is loaded and shown.")
-        else
-            Print("Teleport Frame is nil.")
-        end
-    end
-end
-
-local eventFrame = CreateFrame("Frame")
-eventFrame:RegisterEvent("ADDON_LOADED")
-eventFrame:SetScript("OnEvent", OnAddonLoaded)
+local MT = AceLibrary("AceLocale-2.2"):new("MangosTool");
 
 local function MangosTool_Toggle()
     if (MangosTool:IsVisible()) then
@@ -39,7 +27,7 @@ end
 function MangosTool_ShowTab(tabId)
     if tabId == 1 then
         -- Show the TeleportFrame and hide the main MangosTool frame
-        AtlasLootDefaultFrame:Show()
+        MangosToolTeleportFrame:Show()
         MangosTool:Hide()
     end
     if tabId == 2 then
@@ -52,9 +40,23 @@ function MangosTool_ShowTab(tabId)
     end
 end
 
-MD:RegisterTranslations("enUS", function() return {
+MT:RegisterTranslations("enUS", function() return {
     Tab1 = "Teleport",
     Tab2 = "Add Items",
     Tab3 = "GM Commands",
     Search = "Search",
 } end)
+
+local function OnAddonLoaded(self, event, addonName)
+    if addonName == "MangosTool" then
+        if MangosToolTeleportFrame then
+            Print("Teleport Frame is loaded.")
+        else
+            Print("Teleport Frame is nil.")
+        end
+    end
+end
+
+local eventFrame = CreateFrame("Frame")
+eventFrame:RegisterEvent("ADDON_LOADED")
+eventFrame:SetScript("OnEvent", OnAddonLoaded)

@@ -1,7 +1,7 @@
 <Ui xmlns="http://www.blizzard.com/wow/ui/" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://www.blizzard.com/wow/ui/">
     <Script file="Locations.lua" />
     <Script file="Teleport.lua" />
-    <Frame name="GMCommands_TeleportFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" parent="UIParent" enableKeyboard="true">
+    <Frame name="MangosTool_GMCommandsFrame" toplevel="true" frameStrata="DIALOG" movable="true" enableMouse="true" parent="UIParent" enableKeyboard="true">
         <Size>
             <AbsDimension x="600" y="690" />
         </Size>
@@ -19,13 +19,13 @@
                 <AbsValue val="32"/>
             </EdgeSize>
         </Backdrop>
-        <ScrollFrame name="TeleportScrollFrame" inherits="UIPanelScrollFrameTemplate" parent="GMCommands_TeleportFrame">
+        <ScrollFrame name="TeleportScrollFrame" inherits="UIPanelScrollFrameTemplate" parent="MangosTool_GMCommandsFrame">
             <Size>
                 <AbsDimension x="560" y="620" />
             </Size>
             <Anchors>
-                <Anchor point="TOPLEFT" relativeTo="GMCommands_TeleportFrame" x="10" y="-60" />
-                <Anchor point="BOTTOMRIGHT" relativeTo="GMCommands_TeleportFrame" x="-30" y="10" />
+                <Anchor point="TOPLEFT" relativeTo="MangosTool_GMCommandsFrame" x="10" y="-60" />
+                <Anchor point="BOTTOMRIGHT" relativeTo="MangosTool_GMCommandsFrame" x="-30" y="10" />
             </Anchors>
             <Frame name="TeleportScrollChildFrame" parent="TeleportScrollFrame">
                 <Size>
@@ -33,12 +33,12 @@
                 </Size>
             </Frame>
         </ScrollFrame>
-        <EditBox name="LocationSearchBar" parent="GMCommands_TeleportFrame" inherits="InputBoxTemplate">
+        <EditBox name="LocationSearchBar" parent="MangosTool_GMCommandsFrame" inherits="InputBoxTemplate">
             <Size>
                 <AbsDimension x="200" y="20" />
             </Size>
             <Anchors>
-                <Anchor point="TOP" relativeTo="GMCommands_TeleportFrame" x="0" y="-30" />
+                <Anchor point="TOP" relativeTo="MangosTool_GMCommandsFrame" x="0" y="-30" />
             </Anchors>
             <Scripts>
                 <OnTextChanged>
