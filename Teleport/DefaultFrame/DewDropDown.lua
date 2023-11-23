@@ -266,7 +266,7 @@ AtlasLoot_DewDropDown = {
 			},
 			[21] = { 
 				[BabbleZone["Thousand Needles"]] = {
-					{ BabbleZone["Abyssal Sands"], "Abyssal Sands"},
+					{ BabbleZone["Freewind Post"], "Freewind Post"},
 				},
 			},
 			[22] = { 

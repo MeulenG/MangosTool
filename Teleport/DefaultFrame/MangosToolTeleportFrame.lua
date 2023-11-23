@@ -1,31 +1,3 @@
-locations = {
-    ["Abyssal Sands"] = { x = -8109.34, y = -3067.48, z = 39.9773, map = 1 },
-    ["Addles Stead"] = { x = -10992.6, y = 268.794, z = 28.5101, map = 0 },
-    ["Aerie Peak"] = { x = 327.814, y = -1959.99, z = 198.724, map = 0 },
-    ["Agamand Mills"] = { x = 2803.27, y = 847.119, z = 112.841, map = 0 },
-    ["Agmonds End"] = { x = -7027.81, y = -3330.11, z = 242.51, map = 0 },
-    ["Agol Watha"] = { x = 339.304, y = -3469.39, z = 119.433, map = 0 },
-    ["Alcaz Island"] = { x = -2657.63, y = -4896.05, z = 22.3726, map = 1 },
-    ["Aldor Rise"] = { x = -1769.37, y = 5712.7, z = 127.538, map = 530 },
-    ["Aldrassil"] = { x = 10455.7, y = 798.455, z = 1347.75, map = 1 },
-    ["Alexston Farmsted"] = { x = -10644.8, y = 1681.3, z = 43.0338, map = 0 },
-    ["Algaz Station"] = { x = -4909.52, y = -2726.76, z = 330.06, map = 0 },
-    ["Allerian Stronghold"] = { x = -2903.58, y = 3980.27, z = 0.972477, map = 530 },
-    ["Altar Of Damnation"] = { x = -3592.43, y = 1856.87, z = 48.2406, map = 530 },
-    ["Altar Of Storms A"] = { x = -11272.8, y = -2547.59, z = 103.02, map = 0 },
-    ["Altar Of Storms B"] = { x = -7613.13, y = -761.492, z = 191.807, map = 0 },
-}
-
---[[
-Functions:
-AtlasLoot_DewDropClick(tablename, text, tabletype)
-AtlasLoot_DewDropSubMenuClick(tablename, text)
-AtlasLoot_DefaultFrame_OnShow()
-MangosToolTeleportFrame_OnHide()
-AtlasLoot_DewdropSubMenuRegister(loottable)
-AtlasLoot_DewdropRegister()
-]]
-
 --Include all needed libraries
 local AL = AceLibrary("AceLocale-2.2"):new("AtlasLoot");
 
@@ -105,6 +77,22 @@ function MangosToolTeleportFrame_OnHide()
     AtlasLoot_DewdropSubMenu:Close(1);
 end   
 
+
+function MangosTool_ShowTab(tabId)
+    if tabId == 1 then
+        -- Show the TeleportFrame and hide the main MangosTool frame
+        MangosToolTeleportFrame:Show()
+        MangosTool:Hide()
+    end
+    if tabId == 2 then
+        Mangos_AddItemsFrame:Show()
+        MangosTool_Hide()
+    end
+    if tabId == 3 then
+        Mangos_GMCommandsFrame:Show()
+        MangosTool_Hide()
+    end
+end
 
 --[[
 AtlasLoot_DewdropRegister:

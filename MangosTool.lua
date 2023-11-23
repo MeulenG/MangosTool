@@ -31,11 +31,11 @@ function MangosTool_ShowTab(tabId)
         MangosTool:Hide()
     end
     if tabId == 2 then
-        Mangos_GMCommandsFrame:Show()
+        MangosToolAddItemsFrame:Show()
         MangosTool_Hide()
     end
     if tabId == 3 then
-        Mangos_GMCommandsFrame:Show()
+        MangosToolGMCommandsFrame:Show()
         MangosTool_Hide()
     end
 end
@@ -53,6 +53,16 @@ local function OnAddonLoaded(self, event, addonName)
             Print("Teleport Frame is loaded.")
         else
             Print("Teleport Frame is nil.")
+        end
+        if MangosToolGMCommandsFrame then
+            Print("GMCommands Frame is loaded.")
+        else
+            Print("GMCommands Frame is nil.")
+        end
+        if MangosToolAddItemsFrame then
+            Print("AddItems Frame is loaded.")
+        else
+            Print("AddItems Frame is nil.")
         end
     end
 end

@@ -10,10 +10,12 @@
 embeds.xml
 
 Teleport\Constants\Constants.xml
-Teleport\Core\AtlasLoot.xml
+Teleport\Core\MangosToolTeleport.xml
 Teleport\DefaultFrame\Locations.lua
 Teleport\DefaultFrame\MangosToolTeleportFrame.xml
 
-Teleport\GMCommands\GMCommands.xml
+GMCommands\DefaultFrame\MangosToolGMCommandsFrame.xml
+
+AddItems\DefaultFrame\MangosToolGMCommandsFrame.xml
 
 MangosTool.xml
