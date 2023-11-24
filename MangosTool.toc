@@ -14,8 +14,10 @@ Teleport\Core\MangosToolTeleport.xml
 Teleport\DefaultFrame\Locations.lua
 Teleport\DefaultFrame\MangosToolTeleportFrame.xml
 
+GMCommands\Core\GMCommnads.xml
 GMCommands\DefaultFrame\MangosToolGMCommandsFrame.xml
 
-AddItems\DefaultFrame\MangosToolGMCommandsFrame.xml
+AddItems\Core\AddItems.xml
+AddItems\DefaultFrame\MangosToolAddItemsFrame.xml
 
 MangosTool.xml
