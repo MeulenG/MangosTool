@@ -1,4 +1,4 @@
-locations = {
+LocationsData = {
     ["Abyssal Sands"] = { x = -8109.34, y = -3067.48, z = 39.9773, map = 1 },
     ["Addles Stead"] = { x = -10992.6, y = 268.794, z = 28.5101, map = 0 },
     ["Aerie Peak"] = { x = 327.814, y = -1959.99, z = 198.724, map = 0 },
@@ -416,3 +416,4 @@ locations = {
     ["Nerubian Pits"] = { x = -7245.6, y = 1678.94, z = -64.9066, map = 1 },
     ["Nethergarde Keep"] = { x = -11015.9, y = -3326.09, z = 62.7594, map = 0 },
 }
+return LocationsData
