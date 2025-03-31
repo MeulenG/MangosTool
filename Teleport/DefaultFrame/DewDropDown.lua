@@ -4,8 +4,16 @@ Defines the table listings for the dropdown lists.
 ]]
 
 --Invoke all libraries
-local BabbleZone = LibStub("LibBabble-Zone-3.0"):GetLookupTable();
+AtlasLoot = AceLibrary("AceAddon-2.0"):new("AceDB-2.0")
+
+--Instance required libraries
 local AL = AceLibrary("AceLocale-2.2"):new("AtlasLoot");
+local BC = AceLibrary("Babble-Class-2.2")
+local BabbleZone = AceLibrary("Babble-Zone-2.2")
+local BS = AceLibrary("Babble-Spell-2.2")
+local BB = AceLibrary("Babble-Boss-2.2")
+local BF = AceLibrary("Babble-Faction-2.2")
+local BIS = AceLibrary("Babble-ItemSet-2.2")
 
 --This is a multi-layer table defining the main loot listing.
 --Entries have the text to display, loot table or sub table to link to and if the link is to a loot table or sub table

@@ -2,12 +2,22 @@
 ## Title: MangosTool
 ## Author: OM
 ## Version: 1.0
-## X-Embeds: Ace2, DewdropLib, FuBarPlugin-2.0, TabletLib, LibBabble-Boss-3.0, LibBabble-Class-3.0, LibBabble-Faction-3.0, LibBabble-Inventory-3.0, LibBabble-Zone-3.0
 ## SavedVariables: AtlasLootOptions, AtlasLootFuDB, AtlasLootDB
 ## SavedVariablesPerCharacter: AtlasLootCharDB
-## OptionalDeps: Alphamap, AtlasLoader, LootLink, ItemSync, FuBar, TabletLib, DewdropLib, FuBarPlugin-2.0, FuBar, Ace2, EquipCompare, LibBabble-Boss-3.0, LibBabble-Class-3.0, LibBabble-Faction-3.0, LibBabble-Inventory-3.0, LibBabble-Zone-3.0
 
-embeds.xml
+Libs\AceLibrary\AceLibrary.lua
+Libs\AceOO-2.0\AceOO-2.0.lua
+Libs\AceEvent-2.0\AceEvent-2.0.lua
+Libs\AceDB-2.0\AceDB-2.0.lua
+Libs\AceLocale-2.2\AceLocale-2.2.lua
+Libs\AceAddon-2.0\AceAddon-2.0.lua
+Libs\Babble-Boss-2.2\Babble-Boss-2.2.lua
+Libs\Babble-Class-2.2\Babble-Class-2.2.lua
+Libs\Babble-Faction-2.2\Babble-Faction-2.2.lua
+Libs\Babble-ItemSet-2.2\Babble-ItemSet-2.2.lua
+Libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
+Libs\Babble-Zone-2.2\Babble-Zone-2.2.lua
+Libs\Dewdrop-2.0\Dewdrop-2.0.lua
 
 Teleport\Constants\Constants.xml
 Teleport\Core\MangosToolTeleport.xml
