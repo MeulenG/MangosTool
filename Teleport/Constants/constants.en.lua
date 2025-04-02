@@ -66,4 +66,5 @@ AL:RegisterTranslations("enUS", function() return {
     ["Outland"] = true,
     ["Burning Crusade"] = true,
     ["Abyssal Sands"] = true,
+    ["Blackrock Camp"] = true,
     } end)

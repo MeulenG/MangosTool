@@ -1,5 +1,13 @@
---Include all needed libraries
+AtlasLoot = AceLibrary("AceAddon-2.0"):new("AceDB-2.0")
+
+--Instance required libraries
 local AL = AceLibrary("AceLocale-2.2"):new("AtlasLoot");
+local BC = AceLibrary("Babble-Class-2.2")
+local BZ = AceLibrary("Babble-Zone-2.2")
+local BS = AceLibrary("Babble-Spell-2.2")
+local BB = AceLibrary("Babble-Boss-2.2")
+local BF = AceLibrary("Babble-Faction-2.2")
+local BIS = AceLibrary("Babble-ItemSet-2.2")
 
 --Load the 2 dewdrop menus
 AtlasLoot_Dewdrop = AceLibrary("Dewdrop-2.0");

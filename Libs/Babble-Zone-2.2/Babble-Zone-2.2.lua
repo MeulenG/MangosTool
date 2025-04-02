@@ -44,6 +44,7 @@ BabbleZone:RegisterTranslations("enUS", function()
 		["Blackrock Spire"] = true,
 		["Blackwing Lair"] = true,
 		["Blasted Lands"] = true,
+		["Blackrock Camp"] = true,
 		["Booty Bay"] = true,
 		["Burning Steppes"] = true,
 		["Darkshore"] = true,
