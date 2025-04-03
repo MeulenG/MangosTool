@@ -29,7 +29,7 @@ end
 
 function AtlasLoot_DewDropClick(tablename, text, tabletype)
     -- Call the TeleportHandler with the tablename as the location key
-    local command = TeleportHandler(tablename)
+    local command = TeleportHandler(text)
     if command then
         SendChatMessage(command, "SAY")
     else
