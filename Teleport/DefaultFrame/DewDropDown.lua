@@ -49,7 +49,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Camp Kosh"] },
 					{ BabbleZone["Dreadmaul Hold"] },
 					{ BabbleZone["Hammertoe's Digsite"] },
-					{ BabbleZone["Kargath"], "Kargath"},
+					{ BabbleZone["Kargath"] },
 					{ BabbleZone["Lethlor Ravine"] },
 					{ BabbleZone["Maker's Terrance"] },
 				},
@@ -171,11 +171,6 @@ AtlasLoot_DewDropDown = {
 				},
 			},
 			[15] = { 
-				[BabbleZone["Isle of Quel'Danas"]] = {
-					{ BabbleZone["Abyssal Sands"] },
-				},
-			},
-			[16] = { 
 				[BabbleZone["Loch Modan"]] = {
 					{ BabbleZone["Algaz Station"] },
 					{ BabbleZone["Dun Algaz"] },
@@ -185,7 +180,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Mo'grosh Stronghold"] },
 				},
 			},
-			[17] = { 
+			[16] = { 
 				[BabbleZone["Redridge Mountains"]] = {
 					{ BabbleZone["Althers Mill"] },
 					{ BabbleZone["Lake Everstill"] },
@@ -193,19 +188,14 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Murloc Camp"] },
 				},
 			},
-			[18] = { 
+			[17] = { 
 				[BabbleZone["Searing Gorge"]] = {
 					{ BabbleZone["Dustfire Valley"] },
 					{ BabbleZone["Firewatch Ridge"] },
 					{ BabbleZone["Grimeslit Dig Site"] },
 				},
 			},
-			[19] = { 
-				[BabbleZone["Silvermoon City"]] = {
-					{ BabbleZone["Abyssal Sands"] },
-				},
-			},
-			[20] = { 
+			[18] = { 
 				[BabbleZone["Silverpine Forest"]] = {
 					{ BabbleZone["Amber Mill"] },
 					{ BabbleZone["Dawning Isles"] },
@@ -219,14 +209,14 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Malden's Orchard"] },
 				},
 			},
-			[21] = { 
+			[19] = { 
 				[BabbleZone["Stormwind City"]] = {
 					{ BabbleZone["Champion's Hall"] },
 					{ BabbleZone["Deeprun Tram"] },
 					{ BabbleZone["Mage Quarter"] },
 				},
 			},
-			[22] = { 
+			[20] = { 
 				[BabbleZone["Stranglethorn Vale"]] = {
 					{ BabbleZone["Bloodsail Compound"] },
 					{ BabbleZone["Booty Bay"] },
@@ -238,7 +228,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Kurzen's Compound"] },
 				},
 			},
-			[23] = { 
+			[21] = { 
 				[BabbleZone["Swamp of Sorrows"]] = {
 					{ BabbleZone["Fallow Sanctuary"] },
 					{ BabbleZone["Misty Reed Post"] },
@@ -246,7 +236,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Misty Valley"] },
 				},
 			},
-			[24] = { 
+			[22] = { 
 				[BabbleZone["The Hinterlands"]] = {
 					{ BabbleZone["Aerie Peak"] },
 					{ BabbleZone["Agol'Watha"] },
@@ -254,7 +244,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Jintha'Alor"] },
 				},
 			},
-			[25] = { 
+			[23] = { 
 				[BabbleZone["Tirisfal Glades"]] = {
 					{ BabbleZone["Agamand Mills"] },
 					{ BabbleZone["Bulwark"] },
@@ -265,12 +255,12 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Gunther's Retreat"] },
 				},
 			},
-			[26] = { 
+			[24] = { 
 				[BabbleZone["Undercity"]] = {
 					{ BabbleZone["Magic Quarter"] },
 				},
 			},
-			[27] = { 
+			[25] = { 
 				[BabbleZone["Western Plaguelands"]] = {
 					{ BabbleZone["Caer Darrow"] },
 					{ BabbleZone["Caer Darrow The Dark Portal"] },
@@ -283,7 +273,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Moonbrook"] },
 				},
 			},
-			[28] = {
+			[26] = {
 				[BabbleZone["Westfall"]] = {
 					{ BabbleZone["Alexston Farmstead"] },
 					{ BabbleZone["Dagger Hills"] },
@@ -295,7 +285,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Longshore"] },
 				},
 			},
-			[29] = {
+			[27] = {
 				[BabbleZone["Wetlands"]] = {
 					{ BabbleZone["Baradin Bay"] },
 					{ BabbleZone["Direforge Hill"] },
@@ -331,29 +321,10 @@ AtlasLoot_DewDropDown = {
 			},
 			[2] = { 
 				[BabbleZone["Azshara"]] = {
-					{ BabbleZone["Azshara Azshara"] },
+					{ BabbleZone["Azshara"] },
 				},
 			},
-			[3] = {
-				[BabbleZone["Azuremyst Isle"]] = {
-					{ BabbleZone["Ammen Vale"] },
-					{ BabbleZone["Azuremyst Isle"] },
-					{ BabbleZone["Azure Watch"] },
-					{ BabbleZone["Bristlelimb Village"] },
-					{ BabbleZone["Crash Site"] },
-					{ BabbleZone["Dreanai Start"] },
-					{ BabbleZone["Emberglade"] },
-					{ BabbleZone["Exodar"] },
-				},
-			},
-			[4] = { 
-				[BabbleZone["Bloodmyst Isle"]] = {
-					{ BabbleZone["Bloodcurse Isle"] },
-					{ BabbleZone["Bloodmyst Isle"] },
-					{ BabbleZone["Blood Watch"] },
-				},
-			},
-			[5] = { 
+			[3] = { 
 				[BabbleZone["Darkshore"]] = {
 					{ BabbleZone["Ameth'Aran"] },
 					{ BabbleZone["Auberdine"] },
@@ -367,7 +338,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Mist's Edge"] },
 				},
 			},
-			[6] = { 
+			[4] = { 
 				[BabbleZone["Darnassus"]] = {
 					{ BabbleZone["Aldrassil"]},
 					{ BabbleZone["The Cenarion Enclave"] },
@@ -375,7 +346,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Darnassus"] },
 				},
 			},
-			[7] = { 
+			[5] = { 
 				[BabbleZone["Desolace"]] = {
 					{ BabbleZone["Desolace"] },
 					{ BabbleZone["Gelkis Village"] },
@@ -387,7 +358,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Maraudon"] },
 				},
 			},
-			[8] = { 
+			[6] = { 
 				[BabbleZone["Durotar"]] = {
 					{ BabbleZone["Bladefist Bay"] },
 					{ BabbleZone["Deadeye Shore"] },
@@ -397,7 +368,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Kolkar Crag"] },
 				},
 			},
-			[9] = { 
+			[7] = { 
 				[BabbleZone["Dustwallow Marsh"]] = {
 					{ BabbleZone["Alcaz Island"] },
 					{ BabbleZone["Beezil's Wreck"] },
@@ -409,7 +380,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Lost Point"] },
 				},
 			},
-			[10] = { 
+			[8] = { 
 				[BabbleZone["Felwood"]] = {
 					{ BabbleZone["Bloodvenom Falls"] },
 					{ BabbleZone["Emerald Sanctuary"] },
@@ -417,7 +388,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Jaedenar"] },
 				},
 			},
-			[11] = { 
+			[9] = { 
 				[BabbleZone["Feralas"]] = {
 					{ BabbleZone["Camp Mojache"] },
 					{ BabbleZone["Dire Maul"] },
@@ -428,12 +399,12 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Isle of Dread"] },
 				},
 			},
-			[12] = { 
+			[10] = { 
 				[BabbleZone["Moonglade"]] = {
 					{ BabbleZone["Moonglade"] },
 				},
 			},
-			[13] = { 
+			[11] = { 
 				[BabbleZone["Mulgore"]] = {
 					{ BabbleZone["Mulgore"] },
 					{ BabbleZone["Mulgore Mine"] },
@@ -445,7 +416,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Hunter Rise"] },
 				},
 			},
-			[14] = { 
+			[12] = { 
 				[BabbleZone["Orgrimmar"]] = {
 					{ BabbleZone["Cleft of Shadow"] },
 					{ BabbleZone["Drag"] },
@@ -453,7 +424,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Hidden Path"] },
 				},
 			},
-			[15] = { 
+			[13] = { 
 				[BabbleZone["Silithus"]] = {
 					{ BabbleZone["Cenarion Hold"] },
 					{ BabbleZone["Hive'Ashi"] },
@@ -461,7 +432,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Hive'Zora"] },
 				},
 			},
-			[16] = { 
+			[14] = { 
 				[BabbleZone["Stonetalon Mountains"]] = {
 					{ BabbleZone["Blackwolf River"] },
 					{ BabbleZone["Boulderslide Ravine"] },
@@ -473,7 +444,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Mirkfallon Lake"] },
 				},
 			},
-			[17] = { 
+			[15] = { 
 				[BabbleZone["Tanaris"]] = {
 					{ BabbleZone["Abyssal Sands"] },
 					{ BabbleZone["Caverns of Time"] },
@@ -485,7 +456,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Gaping Chasm"] },
 				},
 			},
-			[18] = { 
+			[16] = { 
 				[BabbleZone["Teldrassil"]] = {
 					{ BabbleZone["Dolanaar"] },
 					{ BabbleZone["Gm Island"] },
@@ -493,7 +464,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Lake Al'Ameth"] },
 				},
 			},
-			[19] = { 
+			[17] = { 
 				[BabbleZone["The Barrens"]] = {
 					{ BabbleZone["Bael Modan"] },
 					{ BabbleZone["Barrens"] },
@@ -507,12 +478,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Merchant Coast"] },
 				},
 			},
-			[20] = { 
-				[BabbleZone["The Exodar"]] = {
-					{ BabbleZone["Abyssal Sands"] },
-				},
-			},
-			[21] = { 
+			[18] = { 
 				[BabbleZone["Thousand Needles"]] = {
 					{ BabbleZone["Freewind Post"] },
 					{ BabbleZone["Darkcloud Pinnacle"] },
@@ -521,12 +487,12 @@ AtlasLoot_DewDropDown = {
 
 				},
 			},
-			[22] = { 
+			[19] = { 
 				[BabbleZone["Thunder Bluff"]] = {
 					{ BabbleZone["Abyssal Sands"] },
 				},
 			},
-			[23] = { 
+			[20] = { 
 				[BabbleZone["Un'Goro Crater"]] = {
 					{ BabbleZone["Fire Plume Ridge"] },
 					{ BabbleZone["Fungal Rock"] },
@@ -536,7 +502,7 @@ AtlasLoot_DewDropDown = {
 					{ BabbleZone["Marshlands"] },
 				},
 			},
-			[24] = { 
+			[21] = { 
 				[BabbleZone["Winterspring"]] = {
 					{ BabbleZone["Darkwhisper Gorge"] },
 					{ BabbleZone["Everlook"] },
