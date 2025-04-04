@@ -40,12 +40,6 @@ function MangosTool_ShowTab(tabId)
     end
 end
 
-MT:RegisterTranslations("enUS", function() return {
-    Tab1 = "Teleport",
-    Tab2 = "Add Items",
-    Tab3 = "GM Commands",
-    Search = "Search",
-} end)
 
 local function OnAddonLoaded(self, event, addonName)
     if addonName == "MangosTool" then

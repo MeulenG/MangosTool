@@ -1,4 +1,13 @@
-AtlasLoot = AceLibrary("AceAddon-2.0"):new("AceDB-2.0")
+local MT = AceLibrary("AceLocale-2.2"):new("MangosTool");
+
+--Instance required libraries
+local AL = AceLibrary("AceLocale-2.2"):new("AtlasLoot");
+local BC = AceLibrary("Babble-Class-2.2")
+local BZ = AceLibrary("Babble-Zone-2.2")
+local BS = AceLibrary("Babble-Spell-2.2")
+local BB = AceLibrary("Babble-Boss-2.2")
+local BF = AceLibrary("Babble-Faction-2.2")
+local BIS = AceLibrary("Babble-ItemSet-2.2")
 
 --Establish version number and compatible version of Atlas
 local VERSION_MAJOR = "0";
@@ -18,6 +27,29 @@ ATLASLOOT_DEBUGSHOWN = false;
 --Set the default anchor for the loot frame to the Atlas frame
 AtlasLoot_AnchorFrame = AtlasFrame;
 
+
+function MangosTool_ShowTab(tabId)
+    if tabId == 1 then
+        -- Show the TeleportFrame and hide the main MangosTool frame
+        MangosToolTeleportFrame:Show()
+        MangosTool:Hide()
+    end
+    if tabId == 2 then
+        MangosToolAddItemsFrame:Show()
+        MangosTool_Hide()
+    end
+    if tabId == 3 then
+        MangosToolGMCommandsFrame:Show()
+        MangosTool_Hide()
+    end
+end
+
+MT:RegisterTranslations("enUS", function() return {
+    Tab1 = "Teleport",
+    Tab2 = "Add Items",
+    Tab3 = "GM Commands",
+    Search = "Search",
+} end)
 
 --[[
 MangosToolTeleport_OnEvent(event):
