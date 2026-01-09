@@ -37,8 +37,14 @@ function MangosTool_HookAtlasLootButtons()
                 button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
                 
                 button:SetScript("OnClick", function()
-                    local itemLink = getglobal(buttonName .. "_Name"):GetText()
+                    local nameFrame = getglobal(buttonName .. "_Name")
+                    local itemLink = nameFrame and nameFrame:GetText() or nil
                     local itemID = this.itemID or MangosTool_ExtractItemID(itemLink)
+                    
+                    if not itemLink or not itemID then
+                        Print("|cffff0000MangosTool Error:|r Unable to identify item")
+                        return
+                    end
                     
                     if arg1 == "LeftButton" then
                         -- Left click - add item to backpack

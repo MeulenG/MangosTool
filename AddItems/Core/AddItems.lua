@@ -51,9 +51,16 @@ function MangosTool_OnItemLeftClick(itemLink, itemID)
     end
     
     -- Generate the item in player's backpack using .additem command
+    -- GM commands should be sent to SAY chat or executed directly
     local command = string.format(".additem %s 1", itemID)
     local success = pcall(function()
-        SendChatMessage(command, "GUILD")
+        -- Try to execute GM command directly, fallback to SAY chat
+        if ChatFrameEditBox and ChatFrameEditBox:IsVisible() then
+            ChatFrameEditBox:SetText(command)
+            ChatEdit_SendText(ChatFrameEditBox, 0)
+        else
+            SendChatMessage(command, "SAY")
+        end
     end)
     
     if success then
@@ -141,7 +148,13 @@ function MangosTool_GiveItemToPlayer(itemLink, itemID, playerName)
     -- Use .additem command with player name
     local command = string.format(".additem %s 1 %s", itemID, playerName)
     local success = pcall(function()
-        SendChatMessage(command, "GUILD")
+        -- Try to execute GM command directly, fallback to SAY chat
+        if ChatFrameEditBox and ChatFrameEditBox:IsVisible() then
+            ChatFrameEditBox:SetText(command)
+            ChatEdit_SendText(ChatFrameEditBox, 0)
+        else
+            SendChatMessage(command, "SAY")
+        end
     end)
     
     if success then
