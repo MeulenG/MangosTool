@@ -22,58 +22,71 @@ end
 function MangosTool_HookAtlasLootButtons()
     -- AtlasLoot creates item buttons with names like "AtlasLootMenuItem_1", "AtlasLootMenuItem_2", etc.
     -- We need to hook into their OnClick scripts
+    local hooked = 0
     for i = 1, 30 do
         local buttonName = "AtlasLootMenuItem_" .. i
         local button = getglobal(buttonName)
         
         if button and not button.mangosToolHooked then
-            -- Store original script
-            local originalOnEnter = button:GetScript("OnEnter")
-            local originalOnLeave = button:GetScript("OnLeave")
-            
-            -- Add click handlers
-            button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
-            
-            button:SetScript("OnClick", function()
-                local itemLink = getglobal(buttonName .. "_Name"):GetText()
-                local itemID = this.itemID or MangosTool_ExtractItemID(itemLink)
+            local success, err = pcall(function()
+                -- Store original script
+                local originalOnEnter = button:GetScript("OnEnter")
+                local originalOnLeave = button:GetScript("OnLeave")
                 
-                if arg1 == "LeftButton" then
-                    -- Left click - add item to backpack
-                    MangosTool_OnItemLeftClick(itemLink, itemID)
-                elseif arg1 == "RightButton" then
-                    -- Right click - show context menu
-                    MangosTool_OnItemRightClick(this, itemLink, itemID)
-                end
+                -- Add click handlers
+                button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
+                
+                button:SetScript("OnClick", function()
+                    local itemLink = getglobal(buttonName .. "_Name"):GetText()
+                    local itemID = this.itemID or MangosTool_ExtractItemID(itemLink)
+                    
+                    if arg1 == "LeftButton" then
+                        -- Left click - add item to backpack
+                        MangosTool_OnItemLeftClick(itemLink, itemID)
+                    elseif arg1 == "RightButton" then
+                        -- Right click - show context menu
+                        MangosTool_OnItemRightClick(this, itemLink, itemID)
+                    end
+                end)
+                
+                -- Enhanced OnEnter for visual feedback
+                button:SetScript("OnEnter", function()
+                    if originalOnEnter then
+                        originalOnEnter()
+                    end
+                    -- Add highlight
+                    if getglobal(buttonName .. "_Texture") then
+                        getglobal(buttonName .. "_Texture"):SetAlpha(0.8)
+                    end
+                end)
+                
+                button:SetScript("OnLeave", function()
+                    if originalOnLeave then
+                        originalOnLeave()
+                    end
+                    -- Remove highlight
+                    if getglobal(buttonName .. "_Texture") then
+                        getglobal(buttonName .. "_Texture"):SetAlpha(1.0)
+                    end
+                    -- Close context menu if open
+                    if AtlasLoot_ItemContextMenu and AtlasLoot_ItemContextMenu:IsOpen() then
+                        AtlasLoot_ItemContextMenu:Close()
+                    end
+                end)
+                
+                button.mangosToolHooked = true
+                hooked = hooked + 1
             end)
             
-            -- Enhanced OnEnter for visual feedback
-            button:SetScript("OnEnter", function()
-                if originalOnEnter then
-                    originalOnEnter()
-                end
-                -- Add highlight
-                if getglobal(buttonName .. "_Texture") then
-                    getglobal(buttonName .. "_Texture"):SetAlpha(0.8)
-                end
-            end)
-            
-            button:SetScript("OnLeave", function()
-                if originalOnLeave then
-                    originalOnLeave()
-                end
-                -- Remove highlight
-                if getglobal(buttonName .. "_Texture") then
-                    getglobal(buttonName .. "_Texture"):SetAlpha(1.0)
-                end
-                -- Close context menu if open
-                if AtlasLoot_ItemContextMenu and AtlasLoot_ItemContextMenu:IsOpen() then
-                    AtlasLoot_ItemContextMenu:Close()
-                end
-            end)
-            
-            button.mangosToolHooked = true
+            if not success then
+                Print("|cffff0000MangosTool Error:|r Failed to hook button " .. buttonName .. " - " .. tostring(err))
+            end
         end
+    end
+    
+    if hooked > 0 then
+        -- Only print debug message if we actually hooked buttons
+        -- Print("|cff00ff00MangosTool:|r Hooked " .. hooked .. " item buttons")
     end
 end
 
@@ -87,11 +100,21 @@ function MangosTool_ExtractItemID(itemLink)
 end
 
 -- Hook into AtlasLoot's ShowItemsFrame function to ensure our hooks are applied
-local originalShowItemsFrame = AtlasLoot_ShowItemsFrame
-if originalShowItemsFrame then
+-- This ensures our click handlers are reapplied when AtlasLoot shows new items
+if AtlasLoot_ShowItemsFrame then
+    local originalShowItemsFrame = AtlasLoot_ShowItemsFrame
     AtlasLoot_ShowItemsFrame = function(...)
-        originalShowItemsFrame(unpack(arg))
+        local success, err = pcall(function()
+            originalShowItemsFrame(unpack(arg))
+        end)
+        if not success then
+            Print("|cffff0000MangosTool Error:|r Failed to show items - " .. tostring(err))
+        end
         -- Re-hook buttons after items are shown
         MangosTool_HookAtlasLootButtons()
     end
+else
+    -- If AtlasLoot_ShowItemsFrame doesn't exist, try to hook it on frame show
+    Print("|cffFF8400MangosTool:|r AtlasLoot_ShowItemsFrame not found. Will attempt to hook on frame show.")
 end
+

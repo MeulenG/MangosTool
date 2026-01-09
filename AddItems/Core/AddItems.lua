@@ -46,14 +46,21 @@ end
 -- Item click handlers
 function MangosTool_OnItemLeftClick(itemLink, itemID)
     if not itemID then
-        Print("Error: Invalid item ID")
+        Print("|cffff0000MangosTool Error:|r Invalid item ID")
         return
     end
     
     -- Generate the item in player's backpack using .additem command
     local command = string.format(".additem %s 1", itemID)
-    SendChatMessage(command, "GUILD")
-    Print("|cff00ff00Item generated:|r " .. itemLink)
+    local success = pcall(function()
+        SendChatMessage(command, "GUILD")
+    end)
+    
+    if success then
+        Print("|cff00ff00Item generated:|r " .. (itemLink or "Item " .. itemID))
+    else
+        Print("|cffff0000MangosTool Error:|r Failed to send command")
+    end
 end
 
 function MangosTool_OnItemRightClick(button, itemLink, itemID)
@@ -133,11 +140,18 @@ function MangosTool_GiveItemToPlayer(itemLink, itemID, playerName)
     
     -- Use .additem command with player name
     local command = string.format(".additem %s 1 %s", itemID, playerName)
-    SendChatMessage(command, "GUILD")
-    Print("|cff00ff00Item sent to " .. playerName .. ":|r " .. itemLink)
+    local success = pcall(function()
+        SendChatMessage(command, "GUILD")
+    end)
+    
+    if success then
+        Print("|cff00ff00Item sent to " .. playerName .. ":|r " .. (itemLink or "Item " .. itemID))
+    else
+        Print("|cffff0000MangosTool Error:|r Failed to send command")
+    end
     
     -- Close the context menu
-    if AtlasLoot_ItemContextMenu:IsOpen() then
+    if AtlasLoot_ItemContextMenu and AtlasLoot_ItemContextMenu:IsOpen() then
         AtlasLoot_ItemContextMenu:Close()
     end
 end
