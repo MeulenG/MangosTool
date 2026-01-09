@@ -1,62 +1,34 @@
 local MT = AceLibrary("AceLocale-2.2"):new("MangosTool");
 
 local function MangosTool_Toggle()
-    if (MangosTool:IsVisible()) then
-        MangosTool:Hide()
+    if MangosToolAddItemsFrame and MangosToolAddItemsFrame:IsVisible() then
+        MangosToolAddItemsFrame:Hide()
     else
-        MangosTool:Show()
+        if MangosToolAddItemsFrame then
+            MangosToolAddItemsFrame:Show()
+        end
     end
 end
 
 -- Slash Commands
-SLASH_TOGGLETPUI1 = "/mangostool"
+SLASH_MANGOSTOOL1 = "/mangostool"
+SLASH_MANGOSTOOL2 = "/mt"
 SLASH_RELOADUI1 = "/rl";
+
 -- Parse Commands
 SlashCmdList.RELOADUI = ReloadUI;
-SlashCmdList["TOGGLETPUI"] = MangosTool_Toggle
+SlashCmdList["MANGOSTOOL"] = MangosTool_Toggle
 
 function Print(text)
 	DEFAULT_CHAT_FRAME:AddMessage(text)
 end
 
-function MangosTool_OnCloseButton()
-	--Hide the item frame
-	MangosTool:Hide();
-end
-
-function MangosTool_ShowTab(tabId)
-    if tabId == 1 then
-        -- Show the TeleportFrame and hide the main MangosTool frame
-        MangosToolTeleportFrame:Show()
-        MangosTool:Hide()
-    end
-    if tabId == 2 then
-        MangosToolAddItemsFrame:Show()
-        MangosTool_Hide()
-    end
-    if tabId == 3 then
-        MangosToolGMCommandsFrame:Show()
-        MangosTool_Hide()
-    end
-end
-
-
 local function OnAddonLoaded(self, event, addonName)
     if addonName == "MangosTool" then
-        if MangosToolTeleportFrame then
-            Print("Teleport Frame is loaded.")
-        else
-            Print("Teleport Frame is nil.")
-        end
-        if MangosToolGMCommandsFrame then
-            Print("GMCommands Frame is loaded.")
-        else
-            Print("GMCommands Frame is nil.")
-        end
         if MangosToolAddItemsFrame then
-            Print("AddItems Frame is loaded.")
+            Print("|cffFF8400MangosTool|r loaded. Use /mangostool or /mt to open.")
         else
-            Print("AddItems Frame is nil.")
+            Print("|cffff0000MangosTool Error:|r AddItems Frame failed to load.")
         end
     end
 end
