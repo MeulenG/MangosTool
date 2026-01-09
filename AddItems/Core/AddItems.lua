@@ -66,6 +66,12 @@ function MangosTool_OnItemRightClick(button, itemLink, itemID)
         AtlasLoot_ItemContextMenu:Close()
     end
     
+    -- Store item info for the menu
+    MangosTool_ContextItem = {
+        link = itemLink,
+        id = itemID
+    }
+    
     -- Open context menu for item
     AtlasLoot_ItemContextMenu:Register(button,
         'point', function(parent)
@@ -79,18 +85,32 @@ function MangosTool_OnItemRightClick(button, itemLink, itemID)
                 )
                 AtlasLoot_ItemContextMenu:AddLine(
                     'text', "Add to my backpack",
+                    'icon', "Interface\\Icons\\INV_Misc_Bag_08",
                     'closeWhenClicked', true,
                     'func', function()
                         MangosTool_OnItemLeftClick(itemLink, itemID)
                     end
                 )
                 AtlasLoot_ItemContextMenu:AddLine(
-                    'text', "Give to player...",
+                    'text', "Give to player",
+                    'icon', "Interface\\Icons\\INV_Misc_Gift_01",
                     'hasArrow', true,
+                    'value', 'giveToPlayer'
+                )
+            elseif level == 2 and value == 'giveToPlayer' then
+                -- Submenu for entering player name
+                AtlasLoot_ItemContextMenu:AddLine(
+                    'text', 'Enter player name:',
+                    'isTitle', true
+                )
+                AtlasLoot_ItemContextMenu:AddLine(
+                    'text', 'Player Name',
                     'hasEditBox', true,
                     'editBoxText', '',
-                    'editBoxFunc', function(playerName)
-                        MangosTool_GiveItemToPlayer(itemLink, itemID, playerName)
+                    'editBoxFunc', function(text)
+                        if text and text ~= "" then
+                            MangosTool_GiveItemToPlayer(MangosTool_ContextItem.link, MangosTool_ContextItem.id, text)
+                        end
                     end
                 )
             end
