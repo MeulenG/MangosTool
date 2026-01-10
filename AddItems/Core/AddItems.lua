@@ -53,19 +53,29 @@ function MangosTool_OnItemLeftClick(itemLink, itemID)
         return
     end
     
+    -- Validate itemID is numeric to prevent command injection
+    local numericID = tonumber(itemID)
+    if not numericID or numericID <= 0 then
+        Print("|cffff0000MangosTool Error:|r Invalid item ID format")
+        return
+    end
+    
     -- Generate the item in player's backpack using .additem command
     -- GM commands in Vanilla should be sent to SAY chat
-    local command = string.format(".additem %s 1", itemID)
+    local command = string.format(".additem %d 1", numericID)
     local success, err = pcall(function()
         SendChatMessage(command, "SAY")
     end)
     
     if success then
-        Print("|cff00ff00Item generated:|r " .. (itemLink or "Item " .. itemID))
+        Print("|cff00ff00Item generated:|r " .. (itemLink or "Item " .. numericID))
     else
         Print("|cffff0000MangosTool Error:|r Failed to send command - " .. tostring(err))
     end
 end
+
+-- Local storage for context menu item (safer than global)
+local MangosToolContextItem = nil
 
 function MangosTool_OnItemRightClick(button, itemLink, itemID)
     if not itemID or not itemLink then
@@ -77,8 +87,8 @@ function MangosTool_OnItemRightClick(button, itemLink, itemID)
         AtlasLoot_ItemContextMenu:Close()
     end
     
-    -- Store item info for the menu
-    MangosTool_ContextItem = {
+    -- Store item info for the menu (local variable, not global)
+    MangosToolContextItem = {
         link = itemLink,
         id = itemID
     }
@@ -119,8 +129,8 @@ function MangosTool_OnItemRightClick(button, itemLink, itemID)
                     'hasEditBox', true,
                     'editBoxText', '',
                     'editBoxFunc', function(text)
-                        if text and text ~= "" then
-                            MangosTool_GiveItemToPlayer(MangosTool_ContextItem.link, MangosTool_ContextItem.id, text)
+                        if text and text ~= "" and MangosToolContextItem then
+                            MangosTool_GiveItemToPlayer(MangosToolContextItem.link, MangosToolContextItem.id, text)
                         end
                     end
                 )
@@ -142,15 +152,29 @@ function MangosTool_GiveItemToPlayer(itemLink, itemID, playerName)
         return
     end
     
+    -- Validate itemID is numeric to prevent command injection
+    local numericID = tonumber(itemID)
+    if not numericID or numericID <= 0 then
+        Print("|cffff0000MangosTool Error:|r Invalid item ID format")
+        return
+    end
+    
+    -- Sanitize player name (alphanumeric only)
+    local sanitizedName = string.gsub(playerName, "[^%w]", "")
+    if sanitizedName ~= playerName then
+        Print("|cffff0000Error:|r Invalid player name (alphanumeric only)")
+        return
+    end
+    
     -- Use .additem command with player name
     -- GM commands in Vanilla should be sent to SAY chat
-    local command = string.format(".additem %s 1 %s", itemID, playerName)
+    local command = string.format(".additem %d 1 %s", numericID, sanitizedName)
     local success, err = pcall(function()
         SendChatMessage(command, "SAY")
     end)
     
     if success then
-        Print("|cff00ff00Item sent to " .. playerName .. ":|r " .. (itemLink or "Item " .. itemID))
+        Print("|cff00ff00Item sent to " .. sanitizedName .. ":|r " .. (itemLink or "Item " .. numericID))
     else
         Print("|cffff0000MangosTool Error:|r Failed to send command - " .. tostring(err))
     end

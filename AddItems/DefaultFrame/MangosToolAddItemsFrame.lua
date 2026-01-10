@@ -25,7 +25,7 @@ function MangosTool_HookAtlasLootButtons()
     local hooked = 0
     for i = 1, 30 do
         local buttonName = "AtlasLootMenuItem_" .. i
-        local button = getglobal(buttonName)
+        local button = _G[buttonName]  -- Use _G instead of deprecated getglobal()
         
         if button and not button.mangosToolHooked then
             local success, err = pcall(function()
@@ -37,7 +37,7 @@ function MangosTool_HookAtlasLootButtons()
                 button:RegisterForClicks("LeftButtonUp", "RightButtonUp")
                 
                 button:SetScript("OnClick", function()
-                    local nameFrame = getglobal(buttonName .. "_Name")
+                    local nameFrame = _G[buttonName .. "_Name"]  -- Use _G instead of deprecated getglobal()
                     local itemLink = nameFrame and nameFrame:GetText() or nil
                     local itemID = this.itemID or MangosTool_ExtractItemID(itemLink)
                     
@@ -61,8 +61,9 @@ function MangosTool_HookAtlasLootButtons()
                         originalOnEnter()
                     end
                     -- Add highlight
-                    if getglobal(buttonName .. "_Texture") then
-                        getglobal(buttonName .. "_Texture"):SetAlpha(0.8)
+                    local texture = _G[buttonName .. "_Texture"]
+                    if texture then
+                        texture:SetAlpha(0.8)
                     end
                 end)
                 
@@ -71,8 +72,9 @@ function MangosTool_HookAtlasLootButtons()
                         originalOnLeave()
                     end
                     -- Remove highlight
-                    if getglobal(buttonName .. "_Texture") then
-                        getglobal(buttonName .. "_Texture"):SetAlpha(1.0)
+                    local texture = _G[buttonName .. "_Texture"]
+                    if texture then
+                        texture:SetAlpha(1.0)
                     end
                     -- Close context menu if open
                     if AtlasLoot_ItemContextMenu and AtlasLoot_ItemContextMenu:IsOpen() then
@@ -111,7 +113,7 @@ if AtlasLoot_ShowItemsFrame then
     local originalShowItemsFrame = AtlasLoot_ShowItemsFrame
     AtlasLoot_ShowItemsFrame = function(...)
         local success, err = pcall(function()
-            originalShowItemsFrame(unpack(arg))
+            originalShowItemsFrame(...)  -- Use ... instead of deprecated arg
         end)
         if not success then
             Print("|cffff0000MangosTool Error:|r Failed to show items - " .. tostring(err))
