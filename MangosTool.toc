@@ -1,9 +1,10 @@
 ## Interface: 11200
 ## Title: MangosTool
 ## Author: OM
-## Version: 1.0
-## SavedVariables: AtlasLootOptions, AtlasLootFuDB, AtlasLootDB
-## SavedVariablesPerCharacter: AtlasLootCharDB
+## Version: 2.0
+## SavedVariables: MangosToolDB
+## SavedVariablesPerCharacter: MangosToolCharDB
+## Dependencies: AtlasLoot
 
 Libs\AceLibrary\AceLibrary.lua
 Libs\AceOO-2.0\AceOO-2.0.lua

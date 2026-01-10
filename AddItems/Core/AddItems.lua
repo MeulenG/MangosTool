@@ -34,8 +34,11 @@ MT:RegisterTranslations("enUS", function() return {
     ["Add Items"] = "Add Items",
 } end )
 
--- Initialize the addon
-AtlasLoot = AceLibrary("AceAddon-2.0"):new("AceDB-2.0")
+-- Don't create our own AtlasLoot instance - use the existing one from the AtlasLoot addon
+-- Just ensure the variables we need are set up
+if not AtlasLoot then
+    Print("|cffff0000MangosTool Error:|r AtlasLoot addon is required but not loaded!")
+end
 
 function MangosTool_Hide()
     if MangosToolAddItemsFrame then
@@ -51,22 +54,16 @@ function MangosTool_OnItemLeftClick(itemLink, itemID)
     end
     
     -- Generate the item in player's backpack using .additem command
-    -- GM commands should be sent to SAY chat or executed directly
+    -- GM commands in Vanilla should be sent to SAY chat
     local command = string.format(".additem %s 1", itemID)
-    local success = pcall(function()
-        -- Try to execute GM command directly, fallback to SAY chat
-        if ChatFrameEditBox and ChatFrameEditBox:IsVisible() then
-            ChatFrameEditBox:SetText(command)
-            ChatEdit_SendText(ChatFrameEditBox, 0)
-        else
-            SendChatMessage(command, "SAY")
-        end
+    local success, err = pcall(function()
+        SendChatMessage(command, "SAY")
     end)
     
     if success then
         Print("|cff00ff00Item generated:|r " .. (itemLink or "Item " .. itemID))
     else
-        Print("|cffff0000MangosTool Error:|r Failed to send command")
+        Print("|cffff0000MangosTool Error:|r Failed to send command - " .. tostring(err))
     end
 end
 
@@ -146,21 +143,16 @@ function MangosTool_GiveItemToPlayer(itemLink, itemID, playerName)
     end
     
     -- Use .additem command with player name
+    -- GM commands in Vanilla should be sent to SAY chat
     local command = string.format(".additem %s 1 %s", itemID, playerName)
-    local success = pcall(function()
-        -- Try to execute GM command directly, fallback to SAY chat
-        if ChatFrameEditBox and ChatFrameEditBox:IsVisible() then
-            ChatFrameEditBox:SetText(command)
-            ChatEdit_SendText(ChatFrameEditBox, 0)
-        else
-            SendChatMessage(command, "SAY")
-        end
+    local success, err = pcall(function()
+        SendChatMessage(command, "SAY")
     end)
     
     if success then
         Print("|cff00ff00Item sent to " .. playerName .. ":|r " .. (itemLink or "Item " .. itemID))
     else
-        Print("|cffff0000MangosTool Error:|r Failed to send command")
+        Print("|cffff0000MangosTool Error:|r Failed to send command - " .. tostring(err))
     end
     
     -- Close the context menu
