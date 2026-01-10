@@ -1,9 +1,10 @@
 ## Interface: 11200
 ## Title: MangosTool
 ## Author: OM
-## Version: 1.0
-## SavedVariables: AtlasLootOptions, AtlasLootFuDB, AtlasLootDB
-## SavedVariablesPerCharacter: AtlasLootCharDB
+## Version: 2.0
+## SavedVariables: MangosToolDB
+## SavedVariablesPerCharacter: MangosToolCharDB
+## Dependencies: AtlasLoot
 
 Libs\AceLibrary\AceLibrary.lua
 Libs\AceOO-2.0\AceOO-2.0.lua
@@ -19,15 +20,7 @@ Libs\Babble-Spell-2.2\Babble-Spell-2.2.lua
 Libs\Babble-Zone-2.2\Babble-Zone-2.2.lua
 Libs\Dewdrop-2.0\Dewdrop-2.0.lua
 
-Teleport\Constants\Constants.xml
-Teleport\Core\MangosToolTeleport.xml
-Teleport\DefaultFrame\Locations.lua
-Teleport\DefaultFrame\MangosToolTeleportFrame.xml
-
-GMCommands\Core\GMCommnads.xml
-GMCommands\DefaultFrame\MangosToolGMCommandsFrame.xml
-
-AddItems\Core\AddItems.xml
+AddItems\Core\AddItems.lua
 AddItems\DefaultFrame\MangosToolAddItemsFrame.xml
 
 MangosTool.xml
